@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<!--
+			t.offsetWidth
+				IE:300
+				chrome:298
+			t.clientWidth
+				IE:306
+				chrome:304
+			t.style.width
+				二者都是300px
+		-->
+	</head>
+	<body>
+		<div id="test" style="width:300px;height:200px; padding:2px;position:absolute;border:1px solid #777; left:400px; top:200px;">
+
+		</div>
+		<button id="btn" onclick="change();">change</button>
+		<script type="text/javascript">
+			var t = document.getElementById('test');
+			
+			function change() {
+				t.style.width = (parseFloat(t.style.width)-10)+"px";
+				var timer = setTimeout(change, 50);
+
+				if(parseFloat(t.style.width) <= 0) {
+					clearTimeout(timer);
+					alert(t.style.width);
+				}
+			}
+		</script>
+	</body>
+</html>

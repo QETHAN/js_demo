@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<!--
+			t.offsetWidth
+				IE:300
+				chrome:298
+			t.clientWidth
+				IE:306
+				chrome:304
+			t.style.width
+				二者都是300px
+		-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="test" style="width:300px;height:200px; padding:2px;position:absolute;border:1px solid #777; left:400px; top:200px;">
+
+		</div>
+		<button id="btn" onclick="change();">change</button>
+		<script type="text/javascript">			
+			function change() {
+				$('#test').animate({width:0+"px"},4000).animate({height:  
+            0+"px"},4000);
+			}
+		</script>
+	</body>
+</html>
