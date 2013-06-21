@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			var o;
+			o = Object.create(null);
+
+			o = {};
+			//same as above
+			o = Object.create(Object.prototype);
+
+			o = Object.create(Object.prototype, {
+				// foo会成为所创建对象的数据属性
+				foo: {
+					writable:true,
+					configurable:true,
+					value:"hello"
+				},
+				 // bar会成为所创建对象的访问器属性
+				bar: {
+					configurable:false,
+					get:function(){
+						return 10;
+					},
+					set:function(value){
+						console.log("Setting `o.bar` to",value);
+					}
+				}
+			});
+
+			alert(o.bar=22);
+
+			function Constructor(){}
+			o = new Constructor();
+			// 上面的一句就相当于:
+			o = Object.create(Constructor.prototype);
+			// 当然,如果在Constructor函数中有一些初始化代码,Object.create不能执行那些代码
+
+			// 创建一个以另一个空对象为原型,且拥有一个属性p的对象
+			o = Object.create({},{p:{value:42}});
+
+			// 省略了的属性特性默认为false,所以属性p是不可写,不可枚举,不可配置的:
+			o.p = 11;
+			//o.p还是42;
+
+			o.q = 12
+			for (var prop in o) {
+			   console.log(prop)
+			}
+			//"q"，没有p
+
+			delete o.p //false
+
+			//创建一个可写的,可枚举的,可配置的属性p
+			o2 = Object.create({},
+			 { 
+			 	p: { 
+				 	value: 42, 
+				 	writable: true, 
+				 	enumerable: true, 
+				 	configurable: true 
+			 	} 
+			 });
+
+			//单继承
+			function Shape() {
+				this.x = 0;
+				this.y = 0;
+			}
+
+			Shape.prototype.move = function(x,y) {
+				this.x += x;
+				this.y += y;
+				console.info("Shape moved");
+			}
+
+			function Rectangle() {
+				Shape.call(this);
+			}
+
+			Rectangle.prototype = Object.create(Shape.prototype);
+
+			var rect = new Rectangle();
+
+			rect instanceof Rectangle //true;
+			rect instanceof Shape //true
+
+			function MyClass() {
+				SuperClass.call(this);
+				OtherSuperClass.call(this);
+			}
+
+			//多重继承
+			MyClass.prototype = Object.create(SuperClass.prototype);
+			mixin(MyClass.prototype, OtherSuperClass.prototype);
+
+			MyClass.prototype.myMethod = function() {}
+		</script>
+	</head>
+</html>
