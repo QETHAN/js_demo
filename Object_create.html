@@ -95,6 +95,18 @@
 			mixin(MyClass.prototype, OtherSuperClass.prototype);
 
 			MyClass.prototype.myMethod = function() {}
+
+			//Polyfill
+			if(!Object.create) {
+				Object.create = function(o) {
+					if(arguments.length > 1) {
+						throw new Error('only one argument')
+					}
+					function F() {};
+					F.prototyp = o;
+					return new F();
+				}
+			}
 		</script>
 	</head>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			var Universe;
+			(function(){
+				var instance;
+				Universe = function Universe() {
+					if(instance) {
+						return instance;
+					}
+
+					instance = this;
+
+					this.name = "123";
+				}
+			}());
+
+			Universe.prototype.a = 'a';
+			var u1 = new Universe();
+
+			Universe.prototype.b = 'b';
+			var u2 = new Universe();
+
+			alert(u1===u2);
+			alert(u2.a);
+			alert(u1.b);
+			alert(u1.constructor.name);
+			alert(u1.constructor===Universe);
+		</script>
+	</head>
+</html>
