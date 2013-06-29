@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 构造函数不带括号，一样的
+		不用new的话，this指向window
+		-->
+		<script>
+			function Hello(){
+				alert('111');
+				this.name = 'hello';
+			}
+			var h1 = new Hello;
+			var h2 = new Hello();
+			alert(h1.name);
+			alert(h2.name);
+		</script>
+	</head>
+
+</html>
