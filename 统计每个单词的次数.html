@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<script type="text/javascript">
+			var i, word;
+			var text = "a b of weil be on discuss HTML5,     css3, and other of the open web.";
+			var words = text.toLowerCase().match(/[\w]+/g);
+			
+			var count = {};
+			alert(words.length);
+			for(i=0; i<words.length; i+=1) {
+				word = words[i];
+				if(count[word]) {
+					count[word] += 1;
+				} else {
+					count[word] = 1;
+				}
+			}
+
+		</script>
+    </body>
+</html>
